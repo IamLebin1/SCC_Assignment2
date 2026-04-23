@@ -1,4 +1,3 @@
-import prismaMock from '../prisma-mock';
 import * as bcrypt from 'bcryptjs';
 import { mockDeep, mockReset, DeepMockProxy } from 'jest-mock-extended';
 import { PrismaClient } from '@prisma/client';
