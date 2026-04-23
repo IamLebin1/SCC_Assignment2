@@ -10,6 +10,7 @@ describe('ArticleService', () => {
 
   describe('getArticles sorting', () => {
     test('should use default sorting when query is empty', async () => {
+      // @ts-ignore Prisma deep mock type is too complex for ts-jest here
       prismaMock.article.count.mockResolvedValue(0);
       prismaMock.article.findMany.mockResolvedValue([]);
       await getArticles({}, 1);
@@ -22,6 +23,7 @@ describe('ArticleService', () => {
     });
 
     test('should fallback to default sorting for invalid sort inputs', async () => {
+      // @ts-ignore Prisma deep mock type is too complex for ts-jest here
       prismaMock.article.count.mockResolvedValue(0);
       prismaMock.article.findMany.mockResolvedValue([]);
 
@@ -35,6 +37,7 @@ describe('ArticleService', () => {
     });
 
     test('should apply valid sorting inputs', async () => {
+      // @ts-ignore Prisma deep mock type is too complex for ts-jest here
       prismaMock.article.count.mockResolvedValue(0);
       prismaMock.article.findMany.mockResolvedValue([]);
 
@@ -46,6 +49,7 @@ describe('ArticleService', () => {
         }),
       );
     });
+  });
 
   describe('deleteComment', () => {
     test('should throw an error ', () => {
