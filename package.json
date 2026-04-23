@@ -8,7 +8,9 @@
     "build:prod": "nx build --configuration=production",
     "build:clean": "nx reset && npm install && npm run build",
     "test": "nx test",
-    "build:report": "npx nx graph --file=build-report.html"
+    "test:coverage": "nx test api --coverage",
+    "ci": "npm ci && npx nx test api --coverage && npx nx build api",
+    "deploy:docker" : "docker compose up --build -d"
   },
   "private": true,
   "prisma": {
