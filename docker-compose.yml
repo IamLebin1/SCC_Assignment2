@@ -18,7 +18,7 @@ services:
       retries: 10
 
   realworld-api:
-    image: node:18-alpine
+    image: node:18
     container_name: group36-realworld-api
     working_dir: /app
     restart: unless-stopped
@@ -29,17 +29,20 @@ services:
       - "3000:3000"
     environment:
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/conduit
+      DIRECT_URL: postgresql://postgres:postgres@postgres:5432/conduit
       JWT_SECRET: group36-dev-secret
       NODE_ENV: production
+      NPM_CONFIG_PRODUCTION: "false"
       PORT: 3000
     volumes:
       - .:/app
+      - api-node-modules:/app/node_modules
     command: >
-      sh -c "npm ci &&
+      sh -c "npm ci --include=dev &&
       npx prisma generate --schema src/prisma/schema.prisma &&
       npx prisma migrate deploy --schema src/prisma/schema.prisma &&
-      npx nx build api &&
-      node dist/api/main.js"
+      npx ts-node --transpile-only --compiler-options '{\"module\":\"CommonJS\"}' src/main.ts"
 
 volumes:
   postgres-data:
+  api-node-modules:

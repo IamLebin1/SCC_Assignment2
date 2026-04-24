@@ -19,4 +19,12 @@ export default Router()
       timestamp: new Date()
   });
 })
+.get('/api/health', (req, res) => {
+  res.status(200).json({
+    status: 'UP',
+    team: 'Group 36',
+    uptime: process.uptime(),
+    timestamp: new Date()
+  });
+})
 .use('/api', api);
